@@ -27,8 +27,7 @@ jobs:
     steps:
     - uses: actions/download-artifact@v2
       with:
-        name: artifact
-        path: .
+        path: ${{ env.TAR_FILE }}
 
     - run: |
         ls -R
