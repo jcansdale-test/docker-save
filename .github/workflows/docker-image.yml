@@ -32,7 +32,7 @@ jobs:
         path: path
 
     - run: |
-        ls image
+        ls -R
         docker load --input ${{ env.TAR_FILE }}
 
     - run: docker run ${{ env.IMAGE }}
