@@ -2,7 +2,7 @@ on:
   push:
 
 env:
-  IMAGE_PATH: hello-world:latest
+  IMAGE: hello-world:latest
   TAR_FILE: hello-world.tar
 
 jobs:
@@ -12,10 +12,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - run: docker build . --tag $IMAGE_PATH
+    - run: docker build . --tag $${{ env.IMAGE }}
 
     - run: |
-        docker save $IMAGE_PATH --output $TAR_FILE
+        docker save ${{ env.IMAGE }} --output ${{ env.TAR_FILE }}
         ls
 
     - uses: actions/upload-artifact@v2
