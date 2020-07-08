@@ -30,8 +30,8 @@ jobs:
       with:
         name: image
 
-    - run: |
-        ls -R
-        docker load --input ${{ env.TAR_FILE }}
+    - run: docker image ls        
+        
+    - run: docker load --input ${{ env.TAR_FILE }}
 
     - run: docker run ${{ env.IMAGE }}
