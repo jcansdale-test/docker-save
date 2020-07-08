@@ -30,4 +30,4 @@ jobs:
 
     - run: docker load --input ${{ env.TAR_FILE }}
 
-    - run: docker run $${{ env.IMAGE }}
+    - run: docker run ${{ env.IMAGE }}
