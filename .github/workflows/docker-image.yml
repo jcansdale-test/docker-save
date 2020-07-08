@@ -27,7 +27,12 @@ jobs:
 
     steps:
     - uses: actions/download-artifact@v2
+      with:
+        name: image
+        path: ${{ env.TAR_FILE }}
 
-    - run: docker load --input ${{ env.TAR_FILE }}
+    - run: |
+        ls
+        docker load --input ${{ env.TAR_FILE }}
 
     - run: docker run ${{ env.IMAGE }}
