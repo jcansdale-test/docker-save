@@ -7,18 +7,27 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v2
 
     - run: docker build . --tag $${{ env.IMAGE }}
 
-    - run: |
-        docker save ${{ env.IMAGE }} --output ${{ env.TAR_FILE }}
-        ls
+    - run: docker save ${{ env.IMAGE }} --output ${{ env.TAR_FILE }}
 
     - uses: actions/upload-artifact@v2
       with:
         name: image
         path: ${{ env.TAR_FILE }}
+
+  run:
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/download-artifact@v2
+
+    - run: docker load --input ${{ env.TAR_FILE }}
+
+    - run: docker run $${{ env.IMAGE }}
