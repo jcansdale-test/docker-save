@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - run: docker build . --tag $${{ env.IMAGE }}
+    - run: docker build . --tag ${{ env.IMAGE }}
 
     - run: docker save ${{ env.IMAGE }} --output ${{ env.TAR_FILE }}
 
