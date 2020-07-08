@@ -29,7 +29,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: name
-        path: path
+        path: .
 
     - run: |
         ls -R
