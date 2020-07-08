@@ -18,7 +18,6 @@ jobs:
 
     - uses: actions/upload-artifact@v2
       with:
-        name: name
         path: ${{ env.TAR_FILE }}
 
   run:
@@ -28,7 +27,6 @@ jobs:
     steps:
     - uses: actions/download-artifact@v2
       with:
-        name: name
         path: .
 
     - run: |
