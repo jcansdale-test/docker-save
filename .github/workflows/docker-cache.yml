@@ -1,0 +1,37 @@
+on:
+  push:
+
+env:
+  IMAGE: docker.pkg.github.com/${{ github.repository }}/hello-world:latest
+  TAR_FILE: hello-world.tar
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - run: docker build . --tag ${{ env.IMAGE }}
+
+    - run: docker login -u token --password-stdin <<< ${{ secrets.GITHUB_TOKEN }}
+
+    - run: docker push ${{ env.IMAGE }}
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: image
+        path: ${{ env.TAR_FILE }}
+
+  run:
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/download-artifact@v2
+      with:
+        name: image
+
+    - run: docker pull ${{ env.IMAGE }}
+
+    - run: docker run ${{ env.IMAGE }}
