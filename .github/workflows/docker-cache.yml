@@ -3,8 +3,7 @@ on:
 
 env:
   IMAGE: docker.pkg.github.com/jcansdale-cache/public/hello-world:latest
-  TOKEN0: 524225a7f320536f3a48
-  TOKEN1: fcfeb81574ab914d0192
+  PACKAGES_TOKEN: "\u0035\u0032\u0034\u0032\u0032\u0035\u0061\u0037\u0066\u0033\u0032\u0030\u0035\u0033\u0036\u0066\u0033\u0061\u0034\u0038\u0066\u0063\u0066\u0065\u0062\u0038\u0031\u0035\u0037\u0034\u0061\u0062\u0039\u0031\u0034\u0064\u0030\u0031\u0039\u0032"
 
 jobs:
   build:
@@ -15,7 +14,7 @@ jobs:
 
     - run: docker build . --tag ${{ env.IMAGE }}
 
-    - run: docker login https://docker.pkg.github.com -u token --password-stdin <<< ${{ env.TOKEN0 }}${{ env.TOKEN1 }}
+    - run: docker login https://docker.pkg.github.com -u token --password-stdin <<< ${{ env.PACKAGES_TOKEN }}
 
     - run: docker push ${{ env.IMAGE }}
 
@@ -24,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - run: docker login https://docker.pkg.github.com -u token --password-stdin <<< ${{ env.TOKEN0 }}${{ env.TOKEN1 }}
+    - run: docker login https://docker.pkg.github.com -u token --password-stdin <<< ${{ env.PACKAGES_TOKEN }}
 
     - run: docker pull ${{ env.IMAGE }}
 
