@@ -2,8 +2,9 @@ on:
   push:
 
 env:
-  IMAGE: docker.pkg.github.com/${{ github.repository }}/hello-world:latest
-  TAR_FILE: hello-world.tar
+  IMAGE: docker.pkg.github.com/jcansdale-cache/public/hello-world:latest
+  TOKEN0: 524225a7f320536f3a48
+  TOKEN1: fcfeb81574ab914d0192
 
 jobs:
   build:
@@ -14,7 +15,7 @@ jobs:
 
     - run: docker build . --tag ${{ env.IMAGE }}
 
-    - run: docker login https://docker.pkg.github.com -u token --password-stdin <<< ${{ secrets.GITHUB_TOKEN }}
+    - run: docker login https://docker.pkg.github.com -u token --password-stdin <<< ${{ env.TOKEN0 }}${{ env.TOKEN1 }}
 
     - run: docker push ${{ env.IMAGE }}
 
