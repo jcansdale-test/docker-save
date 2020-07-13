@@ -24,6 +24,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - run: docker login https://docker.pkg.github.com -u token --password-stdin <<< ${{ env.TOKEN0 }}${{ env.TOKEN1 }}
+
     - run: docker pull ${{ env.IMAGE }}
 
     - run: docker run ${{ env.IMAGE }}
