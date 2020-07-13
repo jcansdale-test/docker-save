@@ -19,11 +19,6 @@ jobs:
 
     - run: docker push ${{ env.IMAGE }}
 
-    - uses: actions/upload-artifact@v2
-      with:
-        name: image
-        path: ${{ env.TAR_FILE }}
-
   run:
     needs: [build]
     runs-on: ubuntu-latest
